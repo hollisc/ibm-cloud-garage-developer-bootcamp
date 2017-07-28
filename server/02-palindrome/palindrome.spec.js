@@ -4,8 +4,9 @@ describe('the palindrome canary spec', () => {
     });
 });
 
-function isPalindrome(word) {
-    return word === word.split('').reverse().join('');
+function isPalindrome(phrase) {
+    if (phrase.trim().length === 0) return false;
+    return phrase === phrase.split('').reverse().join('');
   }
 
 describe('a palindrome', () => {
@@ -17,10 +18,20 @@ describe('a palindrome', () => {
     isPalindrome('racecars').should.be.false();
   });
 
-  it('is not race car');
-  it('"   " is not a palindrome');
-  it('"" is not a palindrome');
+  it('is not race car', () => {
+    isPalindrome('race car').should.be.false();
+  });
 
-  it('is "mom dad mom"');
+  it('"   " is not a palindrome', () => {
+    isPalindrome('   ').should.be.false();
+  });
+
+  it('"" is not a palindrome', () => {
+    isPalindrome('').should.be.false();
+  });
+
+  it('is "mom dad mom"', () => {
+    isPalindrome('mom dad mom').should.be.true();
+  });
 
 });

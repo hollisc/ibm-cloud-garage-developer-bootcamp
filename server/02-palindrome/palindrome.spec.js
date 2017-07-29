@@ -1,13 +1,13 @@
 describe('the palindrome canary spec', () => {
   it('shows the infrastructure works', () => {
-      true.should.be.true();
-    });
+    true.should.be.true();
+  });
 });
 
 function isPalindrome(phrase) {
-    if (phrase.trim().length === 0) return false;
-    return phrase === phrase.split('').reverse().join('');
-  }
+  if (phrase.trim().length === 0) return false;
+  return phrase === phrase.split('').reverse().join('');
+}
 
 describe('a palindrome', () => {
   it('is racecar', () => {

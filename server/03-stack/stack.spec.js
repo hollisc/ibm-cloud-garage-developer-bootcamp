@@ -100,4 +100,16 @@ describe.only('the stack spec', () => {
   it('accepts only positive capacity', () => {
     stack.setCapacity(10).should.be.true();
   });
+
+  it('test overflow with a new stack capacity', () => {
+    stack.setCapacity(10);
+    for (let i = 0; i < 10; i++) {
+        stack.push();
+      }
+
+      const overflowFunction = () => {
+        stack.push();
+      };
+      overflowFunction.should.throw('Stack should not exceed ' + 10);
+    });
 });

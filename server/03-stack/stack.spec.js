@@ -1,5 +1,5 @@
 
-
+// Initialize MaxStackSize as part of constructor
 const makeStack = () => {
   let MaxStackSize = 5;
   let queue = 0;
@@ -99,6 +99,8 @@ describe.only('the stack spec', () => {
 
   it('accepts only positive capacity', () => {
     stack.setCapacity(10).should.be.true();
+    stack.setCapacity(0).should.be.false();
+    stack.setCapacity(-10).should.be.false();
   });
 
   it('test overflow with a new stack capacity', () => {

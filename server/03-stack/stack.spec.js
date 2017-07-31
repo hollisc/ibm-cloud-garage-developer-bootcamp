@@ -9,10 +9,10 @@ const makeStack = () => {
   const size = () => queue;
 
   return {
-    isEmpty: isEmpty,
-    push: push,
-    pop: pop,
-    size: size
+    isEmpty,
+    push,
+    pop,
+    size
   };
 };
 
@@ -53,6 +53,7 @@ describe.only('the stack spec', () => {
   });
 
   it('overflows');
+
   it('under-flows');
   it('pops the same one pushed');
   it('pops the same two pushed');

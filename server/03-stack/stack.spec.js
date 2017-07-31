@@ -4,7 +4,10 @@ const makeStack = () => {
 
   let queue = 0;
   const isEmpty = () => queue === 0;
-  const push = () => queue++;
+  const push = () => {
+  if (queue === 5) throw new Error('Stack should not exceed 5');
+  queue++;
+  };
   const pop = () => queue--;
   const size = () => queue;
 
@@ -52,7 +55,17 @@ describe.only('the stack spec', () => {
     stack.size().should.equal(0);
   });
 
-  it('overflows');
+  it('overflows', () => {
+    // Team decided max stack limit is 5
+    stack.push();
+    stack.push();
+    stack.push();
+    stack.push();
+    stack.push();
+    (() => {
+      stack.push();
+    }).should.throw('Stack should not exceed 5');
+  });
 
   it('under-flows');
   it('pops the same one pushed');

@@ -1,13 +1,20 @@
 
-const MaxStackSize = 5;
+
 const makeStack = () => {
+  const MaxStackSize = 5;
   let queue = 0;
+  let stackValues = [];
   const isEmpty = () => queue === 0;
-  const push = () => {
+  const push = (input) => {
   if (queue === MaxStackSize) throw new Error('Stack should not exceed ' + MaxStackSize);
   queue++;
+  stackValues.push(input);
   };
-  const pop = () => queue--;
+  const pop = () => {
+    if (queue === 0) throw new Error('Stack cannot be less than 0.');
+    queue--;
+    return stackValues.pop();
+  };
   const size = () => queue;
 
   return {
@@ -55,18 +62,35 @@ describe.only('the stack spec', () => {
   });
 
   it('overflows', () => {
-    for (let i = 0; i < MaxStackSize; i++) {
+    for (let i = 0; i < 5; i++) {
       stack.push();
     }
 
     const overflowFunction = () => {
       stack.push();
     };
-    overflowFunction.should.throw('Stack should not exceed ' + MaxStackSize);
+    overflowFunction.should.throw('Stack should not exceed ' + 5);
   });
 
-  it('under-flows');
-  it('pops the same one pushed');
-  it('pops the same two pushed');
+  it('under-flows', () => {
+
+    const underflowFunction = () => {
+      stack.pop();
+    };
+    underflowFunction.should.throw('Stack cannot be less than 0.');
+  });
+
+  it('pops the same one pushed', () => {
+    stack.push('A');
+    stack.pop().should.equal('A');
+  });
+
+  it('pops the same two pushed', () => {
+    stack.push('A');
+    stack.push('B');
+    stack.pop().should.equal('B');
+    stack.pop().should.equal('A');
+  });
+
   it('accepts only positive capacity');
 });

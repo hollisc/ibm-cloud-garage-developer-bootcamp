@@ -1,7 +1,7 @@
 
 
 const makeStack = () => {
-  const MaxStackSize = 5;
+  let MaxStackSize = 5;
   let queue = 0;
   let stackValues = [];
   const isEmpty = () => queue === 0;
@@ -16,12 +16,17 @@ const makeStack = () => {
     return stackValues.pop();
   };
   const size = () => queue;
-
+  const setCapacity = (capacity) => {
+    if (capacity <= 0) return false;
+    MaxStackSize = capacity;
+    return true;
+  };
   return {
     isEmpty,
     push,
     pop,
-    size
+    size,
+    setCapacity
   };
 };
 
@@ -92,5 +97,7 @@ describe.only('the stack spec', () => {
     stack.pop().should.equal('A');
   });
 
-  it('accepts only positive capacity');
+  it('accepts only positive capacity', () => {
+    stack.setCapacity(10).should.be.true();
+  });
 });

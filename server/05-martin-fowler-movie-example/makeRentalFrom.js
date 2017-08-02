@@ -1,8 +1,14 @@
-let makeRentalFrom = (movie, daysRented) => {
 
+let makeRentalFrom = (movie, daysRented) => {
   return {
     get movie() { return movie; },
-    get daysRented() { return daysRented; }
+    get daysRented() { return daysRented; },
+    getCharge() {
+      return movie.getCharge(daysRented);
+    },
+    getFrequentRenterPoints() {
+      return movie.getFrequentRenterPoints(daysRented);
+    }
   };
 };
 
